@@ -24,12 +24,19 @@ This function will return the Figure and Axes used. Additional
 customizations, such as manual adjustments to positions, can be carried
 out using these references.
 
+Installation
+============
+
+Download using the *Download* button or click on the line_id_plot.py file
+and then download the *raw* version.
+
 Examples
 ========
 
 Code given below creates the following plot:
 
 .. image:: simple_plot.png
+   :scale: 75%
 
 ::
 
@@ -56,6 +63,7 @@ Code given below creates two Axes in a Figure, and plots data and
 labels in both of them. The result is:
 
 .. image:: multi_axes.png
+   :scale: 75%
 
 ::
 
@@ -80,4 +88,19 @@ labels in both of them. The result is:
   >>> lineid_plot.plot_line_ids(wave, flux, line_wave, line_label1, ax=ax1)
 
 
+License
+=======
+
+Released under BSD; see http://www.opensource.org/licenses/bsd-license.php.
+
+Credits
+=======
+
+Code here is adapted from `lineid_plot`_ procedure in the 
+`IDL Astronomy User's Library`_ (IDLASTRO) IDL code distributed by NASA. 
+
+For comments and suggestions, email to user prasanthhn in the gmail.com domain. 
+
+
 ..  LocalWords:  lineid IDL idlastro gsfc nasa
+
