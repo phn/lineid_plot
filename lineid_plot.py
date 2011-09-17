@@ -94,7 +94,7 @@ def prepare_axes(wave, flux, fig=None, ax_lower=(0.1, 0.1),
                  ax_dim=(0.85, 0.65)):
     # Axes location in figure.
     if not fig:
-        fig = plt.figure(1)
+        fig = plt.figure()
     ax = fig.add_axes([ax_lower[0], ax_lower[1], ax_dim[0], ax_dim[1]])
     ax.plot(wave, flux)
     return fig, ax
