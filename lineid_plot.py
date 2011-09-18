@@ -341,7 +341,7 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
                     rotation=90, horizontalalignment="center",
                     verticalalignment="center",
                     fontsize=label1_size[i],
-                    arrowprops=dict(arrowstyle="->"))
+                    arrowprops=dict(arrowstyle="-"))
         if extend[i]:
             ax.plot([line_wave[i]] * 2, [arrow_tip[i], line_flux[i]],
                     "--", scalex=False, scaley=False)
