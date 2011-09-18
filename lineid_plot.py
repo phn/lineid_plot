@@ -34,6 +34,28 @@ def get_line_flux(line_wave, wave, flux, **kwargs):
     return np.interp(line_wave, wave, flux, **kwargs)
 
 
+def unique_labels(line_labels):
+    """If a label occurs more than once, add num. as suffix."""
+    from collections import defaultdict
+    d = defaultdict(int)
+    for i in line_labels:
+        d[i] += 1
+    for k in d.keys():
+        if d[k] == 1:
+            del d[k]
+    line_labels_u = []
+    for lab in reversed(line_labels):
+        c = d.get(lab, 0)
+        if c >= 1:
+            v = lab + "_num_" + str(c)
+            d[lab] -= 1
+        else:
+            v = lab
+        line_labels_u.insert(0, v)
+
+    return line_labels_u
+
+
 def get_box_loc(fig, ax, line_wave, arrow_tip, box_axes_space=0.06):
     """Box loc in data coords, given Fig. coords offset from arrow_tip.
 
@@ -332,6 +354,12 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
         box_loc = _convert_to_array(box_loc, nlines, "box_loc")
         box_loc = zip(line_wave, box_loc)
 
+    # If any labels are repeated add "_num_#" to it. If there are 3 "X"
+    # then the first gets "X_num_3". The result is passed as the label
+    # parameter of annotate. This makes it easy to find the box
+    # corresponding to a label using Figure.findobj.
+    label_u = unique_labels(line_label1)
+
     # Draw boxes at initial (x, y) location.
     for i in range(nlines):
         ax.annotate(line_label1[i], xy=(line_wave[i], arrow_tip[i]),
@@ -341,10 +369,12 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
                     rotation=90, horizontalalignment="center",
                     verticalalignment="center",
                     fontsize=label1_size[i],
-                    arrowprops=dict(arrowstyle="-"))
+                    arrowprops=dict(arrowstyle="-"),
+                    label=label_u[i])
         if extend[i]:
             ax.plot([line_wave[i]] * 2, [arrow_tip[i], line_flux[i]],
-                    "--", scalex=False, scaley=False)
+                    "--", scalex=False, scaley=False,
+                    label=label_u[i] + "_line")
 
     # Draw the figure so that get_window_extent() below works.
     fig.canvas.draw()
