@@ -88,6 +88,38 @@ labels in both of them. The result is:
   >>> lineid_plot.plot_line_ids(wave, flux, line_wave, line_label1, ax=ax1)
 
 
+Each of the boxes and the lines extending to the flux level have their
+label property set to a unique value. These can be used to quickly
+identify them.
+
+.. code-block:: python
+
+  >>> for i in ax.texts:
+     ....:     print i.get_label()
+     ....:     
+  N V
+  Si II_num_1
+  Si II_num_2
+  Si II_num_3
+  Si II_num_4
+  Si II_num_5
+  Si II_num_6
+  >>> for i in ax.lines:
+     ....:     print i.get_label()
+     ....:     
+  _line0
+  N V_line
+  Si II_num_1_line
+  Si II_num_2_line
+  Si II_num_3_line
+  Si II_num_4_line
+  Si II_num_5_line
+  Si II_num_6_line
+
+
+The label `_line0` corresponds to the plot and was assigned by
+Matplotlib.
+
 License
 =======
 
