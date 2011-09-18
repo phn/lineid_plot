@@ -5,6 +5,14 @@ from matplotlib import pyplot as plt
 
 
 def _convert_to_array(x, size, name):
+    """Check length of array or convert scalar to array.
+
+    Check to see is `x` has the given length `size`. If this is true
+    then return Numpy array equivalent of `x`. If not then raise
+    ValueError, using `name` as an idnetification. If len(x) returns
+    TypeError, then assume it is a scalar and create a Numpy array of
+    length `size`. Each item of this array will have the value as `x`.
+    """
     try:
         l = len(x)
         if l != size:
@@ -13,7 +21,7 @@ def _convert_to_array(x, size, name):
                     name, size))
     except TypeError:
         # Only one item
-        xa = np.array([x] * size)
+        xa = np.array([x] * size)  # Each item is a diff. object.
     else:
         xa = np.array(x)
 
@@ -21,21 +29,60 @@ def _convert_to_array(x, size, name):
 
 
 def get_line_flux(line_wave, wave, flux, **kwargs):
+    """Interpolated flux at a given wavelength (calls np.intrep).
+    """
     return np.interp(line_wave, wave, flux, **kwargs)
 
 
-def get_box_loc(fig, ax, line_wave, arrow_tip, box_axes_space):
+def get_box_loc(fig, ax, line_wave, arrow_tip, box_axes_space=0.06):
+    """Box loc in data coords, given Fig. coords offset from arrow_tip.
+
+    Parameters
+    ----------
+    fig: matplotlib Figure artist
+        Figure on which the boxes will be placed.
+    ax: matplotlib Axes artist
+        Axes on which the boxes will be placed.
+    arrow_tip: list or array of floats
+        Location of tip of arrow, in data coordinates.
+    box_axes_space: float
+        Vertical space between arrow tip and text box in figure
+        coordinates.  Default is 0.06.
+
+    Returns
+    -------
+    box_loc: list of floats
+        Box locations in data coordinates.
+
+    Notes
+    -----
+    Note that this function is not needed if user provides both arrow
+    tip positions and box locations. The use case is when the program
+    has to automatically find positions of boxes. In the automated
+    plotting case, the arrow tip is set to be the top of the Axes
+    (outside this function) and the box locations are determined by
+    `box_axes_space`.
+
+    In Matplotlib annotate function, both the arrow tip and the box
+    location can be specified. While calculating automatic box
+    locations, it is not ideal to use data coordinates to calculate
+    box location, since plots will not have a uniform appearance. Given
+    locations of arrow tips, and a spacing in figure fraction, this
+    function will calculate the box locations in data
+    coordinates. Using this boxes can be placed in a uniform manner.
+
+    """
     # Plot boxes in their original x position, at a height given by the
-    # key word box_axes_spacing above the top edge of Axes. The default
+    # key word box_axes_spacing above the arrow tip. The default
     # is set to 0.06. This is in figure fraction so that the spacing
     # doesn't depend on the data y range.
     box_loc = []
     fig_inv_trans = fig.transFigure.inverted()
     for w, a in zip(line_wave, arrow_tip):
-        # Convert position of tip of arrow, which is equal to arrow_tip
-        # to figure coordinates, add the space between top edge and
-        # text box in figure fraction. Then convert the text box
-        # position back to Axes coordinates.
+        # Convert position of tip of arrow to figure coordinates, add
+        # the vertical space between top edge and text box in figure
+        # fraction. Convert this text box position back to data
+        # coordinates.
         display_coords = ax.transData.transform((w, a))
         figure_coords = fig_inv_trans.transform(display_coords)
         figure_coords[1] += box_axes_space
@@ -49,6 +96,52 @@ def get_box_loc(fig, ax, line_wave, arrow_tip, box_axes_space):
 def adjust_boxes(line_wave, box_widths, left_edge, right_edge,
                  adjust_factor=0.35, factor_decrement=3.0,
                  max_iter=1000):
+    """Ajdust given boxes so that they don't overlap.
+
+    Parameters
+    ----------
+    line_wave: list or array of floats
+        Line wave lengths. These are assumed to be the initial y (wave
+        length) location of the boxes.
+    box_widths: list or array of floats
+        Width of box containing labels for each line identification.
+    left_edge: float
+        Left edge of valid data i.e., wave length minimum.
+    right_edge: float
+        Right edge of valid data i.e., wave lengths maximum.
+    adjust_factor: float
+        Gap between boxes are reduced or increased by this factor after
+        each iteration.
+    factor_decrement: float
+        The `adjust_factor` itself if reduced by this factor, after
+        certain number of iterations. This is useful for crowded
+        regions.
+    max_iter: int
+        Maximum number of iterations to attempt.
+
+    Returns
+    -------
+    wlp, niter, changed: (float, float, float)
+        The new y (wave length) location of the text boxes, the number
+        of iterations used and a flag to indicated whether any changes to
+        the input locations were made or not.
+
+    Notes
+    -----
+    This is a direct translation of the code in lineid_plot.pro file in
+    NASA IDLAstro library.
+
+    Positions are returned either when the boxes no longer overlap or
+    when `max_iter` number of iterations are completed. So if there are
+    many boxes, there is a possibility that the final box locations
+    overlap.
+
+    References
+    ----------
+    + http://idlastro.gsfc.nasa.gov/ftp/pro/plot/lineid_plot.pro
+    + http://idlastro.gsfc.nasa.gov/
+
+    """
     # Adjust positions.
     niter = 0
     changed = True
@@ -92,6 +185,7 @@ def adjust_boxes(line_wave, box_widths, left_edge, right_edge,
 
 def prepare_axes(wave, flux, fig=None, ax_lower=(0.1, 0.1),
                  ax_dim=(0.85, 0.65)):
+    """Create fig and axes if needed and layout axes in fig."""
     # Axes location in figure.
     if not fig:
         fig = plt.figure()
@@ -102,6 +196,87 @@ def prepare_axes(wave, flux, fig=None, ax_lower=(0.1, 0.1),
 
 def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
                   extend=True, **kwargs):
+    """Label features with automatic layout of labels.
+
+    Parameters
+    ----------
+    wave: list or array of floats
+        Wave lengths of data.
+    flux: list or array of floats
+        Flux at each wavelength.
+    line_wave: list or array of floats
+        Wave length of features to be labelled.
+    line_label1: list of strings
+        Label text for each line.
+    label1_size: list of floats
+        Font size in points. If not given the default value in
+        Matplotlib is used. This is typically 12.
+    extend: boolean or list of boolean values
+        For those lines for which this keyword is True, a dashed line
+        will be drawn from the tip of the annotation to the flux at the
+        line.
+    kwargs: key value pairs
+        All of these keywords are optional.
+
+        The following keys are recognized:
+
+          ax : Matplotlib Axes
+              The Axes in which the labels are to be placed. If not
+              given a new Axes is created.
+          fig: Matplotlib Figure
+              The figure in which the labels are to be placed. If `ax`
+              if given then keyword is then ignored. The figure
+              associated with `ax` is used. If `fig` and `ax` are not
+              given then a new figure is created and an axes is added
+              to it.
+          arrow_tip: scalar or list of floats
+              The location of the annotation point, in data coords. If
+              the value is scalar then it is used for all. Default
+              value is the upper bound of the Axes, at the time of
+              plotting.
+          box_loc: scalar or list of floats
+              The y axis location of the text label boxes, in data
+              units. The default is to place it above the `arrow_tip`
+              by `box_axes_space` units in figure fraction length.
+          box_axes_space: float
+              If no `box_loc` is given then the y position of label
+              boxes is set to `arrow_tip` + this many figure fraction
+              units. The default is 0.06. This ensures that the label
+              layout appearance is independent of the y data range.
+
+    Returns
+    -------
+    fig, ax: Matplotlib Figure, Matplotlib Axes
+        Figure instance on which the labels were placed and the Axes
+        instance on which the labels were placed. These can be used for
+        further customizations. For example, some labels can be hidden
+        by accessing the corresponding `Text` instance form the
+        `ax.texts` list.
+
+    Notes
+    -----
+    + By default the labels are placed along the top of the Axes. The
+      annotation point is on the top boundary of the Axes at the y
+      location of the line. The y location of the boxes are 0.06 figure
+      fraction units above the annotation location. This value can be
+      customized using the `box_axes_space` parameter. The value must
+      be in figure fractions units. Y location of both labels and
+      annotation points can be changed using `arrow_tip` and `box_loc`
+      parameters.
+    + If `arrow_tip` parameter is given then it is used as the
+      annotation point. This can be a list in which case each line can
+      have its own annotation point.
+    + If `box_loc` is given, then the boxes are placed at this
+      position. This too can be a list.
+    + `arrow_tip` and `box_loc` are the "y" components of `xy` and
+      `xytext` parameters accepted by the `annotate` function in
+      Matplotlib.
+    + If the `extend` keyword is True then a line is drawn from the
+      annotation point to the flux at the line wavelength. The flux is
+      calculated by linear interpolation. This parameter can be a list,
+      with one value for each line.
+
+    """
     wave = np.array(wave)
     flux = np.array(flux)
     line_wave = np.array(line_wave)
@@ -144,11 +319,11 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     arrow_tip = kwargs.get("arrow_tip", ax_bounds[1])
     arrow_tip = _convert_to_array(arrow_tip, nlines, "arrow_tip")
 
-    # The height of the box from the arrow tip. Either given heights in
-    # data coordiantes or use the box_axes_space in figure
-    # fraction. The latter has a default value and gets used when no
-    # box locations are given. Figure coordiantes are used so that
-    # the location does not dependent on the data y range.
+    # The y location of boxes from the arrow tips. Either given heights
+    # in data coordinates or use `box_axes_space` in figure
+    # fraction. The latter has a default value which is used when no
+    # box locations are given. Figure coordiantes are used so that the
+    # y location does not dependent on the data y range.
     box_loc = kwargs.get("box_loc", None)
     if not box_loc:
         box_axes_space = kwargs.get("box_axes_space", 0.06)
@@ -157,7 +332,7 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
         box_loc = _convert_to_array(box_loc, nlines, "box_loc")
         box_loc = zip(line_wave, box_loc)
 
-    # Draw boxes.
+    # Draw boxes at initial (x, y) location.
     for i in range(nlines):
         ax.annotate(line_label1[i], xy=(line_wave[i], arrow_tip[i]),
                     xytext=(box_loc[i][0],
@@ -175,20 +350,22 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
 
     # Get annotation boxes and convert their dimensions from display
     # coordinates to data coordinates. Specifically, we want the width
-    # in wavelength units.
-    ax_inv_trans = ax.transData.inverted()
+    # in wavelength units. For each annotation box, transform the
+    # bounding box into data coordinates and extract the width.
+    ax_inv_trans = ax.transData.inverted()  # display to data
     box_widths = []  # box width in wavelength units.
-    # For each annotation box, transform the bounding box into data
-    # coordinates and extract the width.
     for box in ax.texts:
         b_ext = box.get_window_extent()
         box_widths.append(b_ext.transformed(ax_inv_trans).width)
 
+    # Find final x locations of boxes so that they don't overlap.
+    # Function adjust_boxes uses a direct translation of the equivalent
+    # code in lineid_plot.pro in IDLASTRO.
     wlp, niter, changed = adjust_boxes(line_wave, box_widths,
                                        np.min(wave), np.max(wave),
                                        adjust_factor=0.35, max_iter=1000)
 
-    # Move the boxes, to new positions.
+    # Redraw the boxes at their new x location.
     for i in range(nlines):
         box = ax.texts[i]
         box.xytext = (wlp[i], box.xytext[1])
@@ -196,6 +373,8 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     # Update the figure
     fig.canvas.draw()
 
+    # Return Figure and Axes so that they can be used for further
+    # manual customization.
     return fig, ax
 
 if __name__ == "__main__":
