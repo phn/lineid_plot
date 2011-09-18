@@ -1,77 +1,277 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset='utf-8'>
-
-  <title>phn/lineid_plot @ GitHub</title>
-
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #609896;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #9f6769; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #9f6769; }
-    h3 { text-align: center; color: #9f6769; }
-    a { color: #9f6769; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
-</head>
-
-<body>
-  <a href="http://github.com/phn/lineid_plot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-
-  <div id="container">
-
-    <div class="download">
-      <a href="http://github.com/phn/lineid_plot/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/phn/lineid_plot/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
-
-    <h1><a href="http://github.com/phn/lineid_plot">lineid_plot</a>
-      <span class="small">by <a href="http://github.com/phn">phn</a></span></h1>
-
-    <div class="description">
-      Automatic layout of labels for features in a plot. 
-    </div>
-
-    <h2>Authors</h2>
-<p>Prasanth Nair (prasanthhn@gmail.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Prasanth (prasanthhn@gmail.com)<br/>      </p>
 
 
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/phn/lineid_plot/zipball/master">zip</a> or
-      <a href="http://github.com/phn/lineid_plot/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/phn/lineid_plot</pre>
-    </p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Line identification plots with automatic label layout &mdash; Line Identification Plots v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="Line Identification Plots v0.1 documentation" href="#" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="#">
+          <span>Line Identification Plots v0.1 documentation</span></a></h1>
+        <h2 class="heading"><span>Line identification plots with automatic label layout</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        <a class="uplink" href="#">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="line-identification-plots-with-automatic-label-layout">
+<h1><a class="toc-backref" href="#id1">Line identification plots with automatic label layout</a><a class="headerlink" href="#line-identification-plots-with-automatic-label-layout" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#line-identification-plots-with-automatic-label-layout" id="id1">Line identification plots with automatic label layout</a><ul>
+<li><a class="reference internal" href="#minimal-plot-with-automatic-label-layout" id="id2">Minimal plot with automatic label layout</a></li>
+<li><a class="reference internal" href="#plot-without-line-from-annotation-point-to-flux-level" id="id3">Plot without line from annotation point to flux level</a></li>
+<li><a class="reference internal" href="#multiple-plots-using-user-provided-axes-instances" id="id4">Multiple plots using user provided Axes instances</a></li>
+<li><a class="reference internal" href="#custom-y-axis-location-for-annotation-points-arrow-tips" id="id5">Custom y axis location for annotation points (arrow tips)</a></li>
+<li><a class="reference internal" href="#custom-y-axis-location-for-label-boxes" id="id6">Custom y axis location for label boxes</a></li>
+<li><a class="reference internal" href="#accessing-a-specific-label" id="id7">Accessing a specific label</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<p>Manually placing labels in plots of spectrum is cumbersome. This module
+attempts to automatically position labels, in such a way that they do
+not overlap with each other.</p>
+<p>The function <cite>plot_line_ids()</cite> takes several keyword parameters that
+can be used to customized the placement of labels. The labels are
+generated using the <cite>annotate</cite> function in Matplotlib. The function
+returns the Figure and Axes instances used, so that further
+customizations can be performed.</p>
+<p>Some example are shown below.</p>
+<div class="section" id="minimal-plot-with-automatic-label-layout">
+<h2><a class="toc-backref" href="#id2">Minimal plot with automatic label layout</a><a class="headerlink" href="#minimal-plot-with-automatic-label-layout" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">lineid_plot</span>
+
+<span class="n">wave</span> <span class="o">=</span> <span class="mi">1240</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
+<span class="n">flux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+
+<span class="n">line_wave</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1242.80</span><span class="p">,</span> <span class="mf">1260.42</span><span class="p">,</span> <span class="mf">1264.74</span><span class="p">,</span> <span class="mf">1265.00</span><span class="p">,</span> <span class="mf">1265.2</span><span class="p">,</span> <span class="mf">1265.3</span><span class="p">,</span> <span class="mf">1265.35</span><span class="p">]</span>
+<span class="n">line_label1</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;N V&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">]</span>
+
+<span class="n">lineid_plot</span><span class="o">.</span><span class="n">plot_line_ids</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">line_wave</span><span class="p">,</span> <span class="n">line_label1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>[<a class="reference external" href="./plot_directive/inline/eb632e691c.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/eb632e691c.pdf">pdf</a>]</p>
+<img alt="_images/eb632e691c12.png" src="_images/eb632e691c12.png" />
+</div>
+<div class="section" id="plot-without-line-from-annotation-point-to-flux-level">
+<h2><a class="toc-backref" href="#id3">Plot without line from annotation point to flux level</a><a class="headerlink" href="#plot-without-line-from-annotation-point-to-flux-level" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">lineid_plot</span>
+
+<span class="n">wave</span> <span class="o">=</span> <span class="mi">1240</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
+<span class="n">flux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+
+<span class="n">line_wave</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1242.80</span><span class="p">,</span> <span class="mf">1260.42</span><span class="p">,</span> <span class="mf">1264.74</span><span class="p">,</span> <span class="mf">1265.00</span><span class="p">,</span> <span class="mf">1265.2</span><span class="p">,</span> <span class="mf">1265.3</span><span class="p">,</span> <span class="mf">1265.35</span><span class="p">]</span>
+<span class="n">line_label1</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;N V&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">]</span>
+
+<span class="c"># Set extend=False.</span>
+<span class="n">lineid_plot</span><span class="o">.</span><span class="n">plot_line_ids</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">line_wave</span><span class="p">,</span> <span class="n">line_label1</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>[<a class="reference external" href="./plot_directive/inline/3daaf25f72.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/3daaf25f72.pdf">pdf</a>]</p>
+<img alt="_images/3daaf25f7210.png" src="_images/3daaf25f7210.png" />
+</div>
+<div class="section" id="multiple-plots-using-user-provided-axes-instances">
+<h2><a class="toc-backref" href="#id4">Multiple plots using user provided Axes instances</a><a class="headerlink" href="#multiple-plots-using-user-provided-axes-instances" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">lineid_plot</span>
+
+<span class="n">wave</span> <span class="o">=</span> <span class="mi">1240</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
+<span class="n">flux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">line_wave</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1242.80</span><span class="p">,</span> <span class="mf">1260.42</span><span class="p">,</span> <span class="mf">1264.74</span><span class="p">,</span> <span class="mf">1265.00</span><span class="p">,</span> <span class="mf">1265.2</span><span class="p">,</span> <span class="mf">1265.3</span><span class="p">,</span> <span class="mf">1265.35</span><span class="p">]</span>
+<span class="n">line_flux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">line_wave</span><span class="p">,</span> <span class="n">wave</span><span class="p">,</span> <span class="n">flux</span><span class="p">)</span>
+<span class="n">line_label1</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;N V&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">]</span>
+<span class="n">label1_sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="c"># First Axes</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">flux</span><span class="p">)</span>
+
+<span class="c"># Pass the Axes instance to the plot_line_ids function.</span>
+<span class="n">lineid_plot</span><span class="o">.</span><span class="n">plot_line_ids</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">line_wave</span><span class="p">,</span> <span class="n">line_label1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="c"># Second Axes</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">])</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">flux</span><span class="p">)</span>
+
+<span class="c"># Pass the Axes instance to the plot_line_ids function.</span>
+<span class="n">lineid_plot</span><span class="o">.</span><span class="n">plot_line_ids</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">line_wave</span><span class="p">,</span> <span class="n">line_label1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>[<a class="reference external" href="./plot_directive/inline/a51c5866df.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/a51c5866df.pdf">pdf</a>]</p>
+<img alt="_images/a51c5866df12.png" src="_images/a51c5866df12.png" />
+</div>
+<div class="section" id="custom-y-axis-location-for-annotation-points-arrow-tips">
+<h2><a class="toc-backref" href="#id5">Custom y axis location for annotation points (arrow tips)</a><a class="headerlink" href="#custom-y-axis-location-for-annotation-points-arrow-tips" title="Permalink to this headline">¶</a></h2>
+<p>Use arrow_tip keyword to alter the annotation point. When assigning
+custom y axis locations, it is best to plot the data, set appropriate
+range for the Axes and then pass the Axes instance to
+<cite>plot_line_ids()</cite>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Use arrow_tip keyword.</span>
+<span class="n">lineid_plot</span><span class="o">.</span><span class="n">plot_line_ids</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">line_wave</span><span class="p">,</span> <span class="n">line_label1</span><span class="p">,</span>
+  <span class="n">arrow_tip</span><span class="o">=</span><span class="mf">3.3</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>[<a class="reference external" href="./plot_directive/inline/3c825083b4.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/3c825083b4.pdf">pdf</a>]</p>
+<img alt="_images/3c825083b412.png" src="_images/3c825083b412.png" />
+<p>Each label can have its own annotation point.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">arrow_tips</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">]</span>
+<span class="n">lineid_plot</span><span class="o">.</span><span class="n">plot_line_ids</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">line_wave</span><span class="p">,</span> <span class="n">line_label1</span><span class="p">,</span>
+  <span class="n">arrow_tip</span><span class="o">=</span><span class="n">arrow_tips</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>[<a class="reference external" href="./plot_directive/inline/7036a8693c.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/7036a8693c.pdf">pdf</a>]</p>
+<img alt="_images/7036a8693c12.png" src="_images/7036a8693c12.png" />
+</div>
+<div class="section" id="custom-y-axis-location-for-label-boxes">
+<h2><a class="toc-backref" href="#id6">Custom y axis location for label boxes</a><a class="headerlink" href="#custom-y-axis-location-for-label-boxes" title="Permalink to this headline">¶</a></h2>
+<p>The label boxes can be given a custom y axis location. The value given
+is taken as the y coordinate of the center of a box, in data
+coordinates. When assigning custom Y locations, it is best to plot the
+data, set appropriate range for the Axes and then pass the Axes
+instance to <cite>plot_line_ids()</cite>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">lineid_plot</span><span class="o">.</span><span class="n">plot_line_ids</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">line_wave</span><span class="p">,</span> <span class="n">line_label1</span><span class="p">,</span>
+  <span class="n">arrow_tip</span><span class="o">=</span><span class="mf">3.3</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">box_loc</span><span class="o">=</span><span class="mf">4.3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>[<a class="reference external" href="./plot_directive/inline/750d6e1dfc.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/750d6e1dfc.pdf">pdf</a>]</p>
+<img alt="_images/750d6e1dfc6.png" src="_images/750d6e1dfc6.png" />
+<p>Each box can be assigned a separate Y box location.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">arrow_tips</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">]</span>
+<span class="n">box_loc</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.3</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">,</span> <span class="mf">4.4</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.4</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">]</span>
+<span class="n">lineid_plot</span><span class="o">.</span><span class="n">plot_line_ids</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">line_wave</span><span class="p">,</span> <span class="n">line_label1</span><span class="p">,</span>
+  <span class="n">arrow_tip</span><span class="o">=</span><span class="n">arrow_tips</span><span class="p">,</span> <span class="n">box_loc</span><span class="o">=</span><span class="n">box_loc</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>[<a class="reference external" href="./plot_directive/inline/00e9f8f8c8.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/00e9f8f8c8.pdf">pdf</a>]</p>
+<img alt="_images/00e9f8f8c87.png" src="_images/00e9f8f8c87.png" />
+</div>
+<div class="section" id="accessing-a-specific-label">
+<h2><a class="toc-backref" href="#id7">Accessing a specific label</a><a class="headerlink" href="#accessing-a-specific-label" title="Permalink to this headline">¶</a></h2>
+<p>Each box has a property named <cite>label</cite>. These are identical to the input
+labels, except when there are duplicated. The duplicate texts are given
+a numeric suffix, based on the order in which the duplicates occur in
+the input. These are generated using the <cite>unique_labels</cite> function.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">line_label1</span>
+<span class="go">[&#39;N V&#39;, &#39;Si II&#39;, &#39;Si II&#39;, &#39;Si II&#39;, &#39;Si II&#39;, &#39;Si II&#39;, &#39;Si II&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lineid_plot</span><span class="o">.</span><span class="n">unique_labels</span><span class="p">(</span><span class="n">line_label1</span><span class="p">)</span>
+<span class="go">[&#39;N V&#39;,</span>
+<span class="go"> &#39;Si II_num_1&#39;,</span>
+<span class="go"> &#39;Si II_num_2&#39;,</span>
+<span class="go"> &#39;Si II_num_3&#39;,</span>
+<span class="go"> &#39;Si II_num_4&#39;,</span>
+<span class="go"> &#39;Si II_num_5&#39;,</span>
+<span class="go"> &#39;Si II_num_6&#39;]</span>
+</pre></div>
+</div>
+<p>Each line extending from the annotation point to the flux level, is
+also assigned a label properties. The value is the above label
+property suffixed with &#8220;_line&#8221;.</p>
+<p>Matplotlib <tt class="docutils literal"><span class="pre">Figure</span></tt> and <tt class="docutils literal"><span class="pre">Axes</span></tt> instances have a method
+<tt class="docutils literal"><span class="pre">findobj()</span></tt> which can be used to find objects in it, that satisfy
+certain conditions. For example, all <tt class="docutils literal"><span class="pre">Annotation</span></tt> objects. It will
+accept a function, and any object that will cause this function to
+return True, will be returned by <tt class="docutils literal"><span class="pre">findobj()</span></tt>.</p>
+<p>In the following one of the &#8220;Si II&#8221; boxes and line extending to the
+flux level are made invisible.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">lineid_plot</span>
+
+<span class="n">wave</span> <span class="o">=</span> <span class="mi">1240</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
+<span class="n">flux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">line_wave</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1242.80</span><span class="p">,</span> <span class="mf">1260.42</span><span class="p">,</span> <span class="mf">1264.74</span><span class="p">,</span> <span class="mf">1265.00</span><span class="p">,</span> <span class="mf">1265.2</span><span class="p">,</span> <span class="mf">1265.3</span><span class="p">,</span> <span class="mf">1265.35</span><span class="p">]</span>
+<span class="n">line_flux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">line_wave</span><span class="p">,</span> <span class="n">wave</span><span class="p">,</span> <span class="n">flux</span><span class="p">)</span>
+<span class="n">line_label1</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;N V&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">,</span> <span class="s">&#39;Si II&#39;</span><span class="p">]</span>
+<span class="n">label1_sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">flux</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">1240</span><span class="p">,</span> <span class="mi">1270</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+
+<span class="n">arrow_tips</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">]</span>
+<span class="n">box_loc</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.3</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">,</span> <span class="mf">4.4</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.4</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">]</span>
+<span class="n">lineid_plot</span><span class="o">.</span><span class="n">plot_line_ids</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">line_wave</span><span class="p">,</span> <span class="n">line_label1</span><span class="p">,</span>
+  <span class="n">arrow_tip</span><span class="o">=</span><span class="n">arrow_tips</span><span class="p">,</span> <span class="n">box_loc</span><span class="o">=</span><span class="n">box_loc</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">findobj</span><span class="p">(</span><span class="n">mpl</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Annotation</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;Si II_num_4&quot;</span><span class="p">:</span>
+       <span class="n">i</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">findobj</span><span class="p">(</span><span class="n">mpl</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;Si II_num_4_line&quot;</span><span class="p">:</span>
+       <span class="n">i</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>[<a class="reference external" href="./plot_directive/inline/bf698428b7.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/bf698428b7.pdf">pdf</a>]</p>
+<img alt="_images/bf698428b7.png" src="_images/bf698428b7.png" />
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        <a class="uplink" href="#">Contents</a>
+        </p>
+
+      </div>
 
     <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/phn/lineid_plot">phn/lineid_plot</a>
+        &copy; Copyright 2011, Prasanth Nair.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
-
-  </div>
-
-  
-</body>
+  </body>
 </html>
