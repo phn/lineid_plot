@@ -116,8 +116,8 @@ def get_box_loc(fig, ax, line_wave, arrow_tip, box_axes_space=0.06):
 
 
 def adjust_boxes(line_wave, box_widths, left_edge, right_edge,
-                 adjust_factor=0.35, factor_decrement=3.0,
-                 max_iter=1000):
+                 max_iter=1000, adjust_factor=0.35,
+                 factor_decrement=3.0, fd_p=0.75):
     """Ajdust given boxes so that they don't overlap.
 
     Parameters
@@ -131,6 +131,8 @@ def adjust_boxes(line_wave, box_widths, left_edge, right_edge,
         Left edge of valid data i.e., wave length minimum.
     right_edge: float
         Right edge of valid data i.e., wave lengths maximum.
+    max_iter: int
+        Maximum number of iterations to attempt.
     adjust_factor: float
         Gap between boxes are reduced or increased by this factor after
         each iteration.
@@ -138,8 +140,10 @@ def adjust_boxes(line_wave, box_widths, left_edge, right_edge,
         The `adjust_factor` itself if reduced by this factor, after
         certain number of iterations. This is useful for crowded
         regions.
-    max_iter: int
-        Maximum number of iterations to attempt.
+    fd_p: float
+        Percentage, given as a fraction between 0 and 1, after which
+        adjust_factor must be reduced by a factor of
+        `factor_decrement`. Default is set to 0.75.
 
     Returns
     -------
@@ -199,7 +203,7 @@ def adjust_boxes(line_wave, box_widths, left_edge, right_edge,
                         left_edge
                 changed = True
             niter += 1
-        if niter == max_iter * 0.75: adjust_factor /= factor_decrement
+        if niter == max_iter * fd_p: adjust_factor /= factor_decrement
         if niter >= max_iter: break
 
     return wlp, changed, niter
@@ -316,7 +320,6 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     label1_size = _convert_to_array(label1_size, nlines, "lable1_size")
 
     extend = _convert_to_array(extend, nlines, "extend")
-    max_iter = kwargs.get('max_iter', 1000)
 
     # Sort.
     indx = np.argsort(wave)
@@ -397,9 +400,13 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     # Find final x locations of boxes so that they don't overlap.
     # Function adjust_boxes uses a direct translation of the equivalent
     # code in lineid_plot.pro in IDLASTRO.
+    max_iter = kwargs.get('max_iter', 1000)
+    adjust_factor = kwargs.get('adjust_factor', 0.35)
+    factor_decrement = kwargs.get('factor_decrement', 3.0)
     wlp, niter, changed = adjust_boxes(line_wave, box_widths,
                                        np.min(wave), np.max(wave),
-                                       adjust_factor=0.35,
+                                       adjust_factor=adjust_factor,
+                                       factor_decrement=factor_decrement,
                                        max_iter=max_iter)
 
     # Redraw the boxes at their new x location.
