@@ -1,7 +1,13 @@
-"""Plot spectral line identifications."""
+"""Automatic placement of labels for features in a plot.
+
+Depends on Numpy and Matplotlib.
+"""
 from __future__ import division, print_function
 import numpy as np
 from matplotlib import pyplot as plt
+
+__version__ = 0.1
+__author__ = "Prasanth Nair"
 
 
 def _convert_to_array(x, size, name):
