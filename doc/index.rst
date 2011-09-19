@@ -354,6 +354,70 @@ flux level are made invisible.
    plt.show()
 
 
+Customizing box location adjustment parameters
+----------------------------------------------
+
+The parameter `max_iter` fixes the maximum number of adjustments to
+perform. Parameter `adjust_factor` sets the factor by which the current
+separation of the boxes must be increased or decreased. After `fd_p`
+percentage of `max_iter` the `adjust_factor` is reduced by a factor of
+`factor_decrement`. The defaults for all these should be enough in most
+situations.
+
+The example below shows, for the data used, a low value of `max_iter`
+doesn't separate the labels well enough.
+
+.. code-block:: python
+
+ lineid_plot.plot_line_ids(wave, flux, line_wave, line_label1, 
+  max_iter=10)
+  
+.. plot::
+
+   import numpy as np
+   from matplotlib import pyplot as plt
+   import matplotlib as mpl
+   import lineid_plot
+    
+   wave = 1240 + np.arange(300) * 0.1
+   flux = np.random.normal(size=300) 
+   line_wave = [1242.80, 1260.42, 1264.74, 1265.00, 1265.2, 1265.3, 1265.35]
+   line_flux = np.interp(line_wave, wave, flux)
+   line_label1 = ['N V', 'Si II', 'Si II', 'Si II', 'Si II', 'Si II', 'Si II']
+   label1_sizes = np.array([12, 12, 12, 12, 12, 12, 12])
+
+   lineid_plot.plot_line_ids(wave, flux, line_wave, line_label1, 
+    max_iter=10)
+
+   plt.show()
+
+Using a value of 300 works. Note that the default is 1000.
+
+.. code-block:: python
+
+ lineid_plot.plot_line_ids(wave, flux, line_wave, line_label1, 
+  max_iter=300)
+
+.. plot::
+
+   import numpy as np
+   from matplotlib import pyplot as plt
+   import matplotlib as mpl
+   import lineid_plot
+    
+   wave = 1240 + np.arange(300) * 0.1
+   flux = np.random.normal(size=300) 
+   line_wave = [1242.80, 1260.42, 1264.74, 1265.00, 1265.2, 1265.3, 1265.35]
+   line_flux = np.interp(line_wave, wave, flux)
+   line_label1 = ['N V', 'Si II', 'Si II', 'Si II', 'Si II', 'Si II', 'Si II']
+   label1_sizes = np.array([12, 12, 12, 12, 12, 12, 12])
+
+   lineid_plot.plot_line_ids(wave, flux, line_wave, line_label1, 
+    max_iter=300)
+
+   plt.show()
+
+
 .. Indices and tables
 .. ==================
 ..  
