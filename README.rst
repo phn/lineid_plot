@@ -5,33 +5,85 @@ Line identification plots using Matplotlib
 .. _IDL Astronomy User's Library: http://idlastro.gsfc.nasa.gov/
 
 Manually labeling features in a crowed plot can be very time
-consuming. This module can be used to automatically place labels for
-given features in a plot, without the labels overlapping each
-other. This is useful, for example, in creating plots of spectrum with
-specific lines identified with labels.
+consuming. Functions in this module can be used to automatically place
+labels for given features in a plot, without the labels overlapping
+each other. This is useful, for example, in creating plots of spectrum
+with lines identified with labels.
 
 The placements are calculated using a simple, iterative algorithm
 adapted from the procedure `lineid_plot`_ in the NASA `IDL Astronomy
-User's Library`_. Matplotlib makes most of the computations in the
-above IDL procedure unnecessary.
+User's Library`_. Matplotlib makes most of the other computations such
+as extracting width of label boxes, re-positioning them etc., very
+easy.
 
 The main function in the module is `plot_line_ids()`. Labeled plots can
 be created by passing the x and y coordinates, for example wavelength
 and flux, along with the x coordinates of the features and their
-labels.
+labels. The x coordinates are adjusted until the labels, of given size,
+do not overlap, or when the iteration limit is reached.
 
-This function will return the Figure and Axes used. Additional
-customizations, such as manual adjustments to positions, can be carried
-out using these references.
+Users can provide the Axes instance or the Figure instance on which
+plots are to be made. If an Axes instance is provided, then the data is
+not plotted; only the labels are marked. This allows the user to
+separate plotting from labeling. For example, the user can create
+multiple Axes on a figure and then pass the Axes on which labels are to
+be marked. No changes are made to the existing layout. 
+
+The y axis locations of labels and annotation points i.e., arrow tips,
+can also be passed to the `plot_line_ids()` function. Minor changes can
+be passed using the `box_axes_space` keyword, where as major changes
+can be passed using the `arrow_tip` and `box_loc` keywords. The former
+is in figure fraction units and the latter two are in data
+coordinates. The latter two can be specified separately for each
+label. This is very useful in crowded regions. These features along
+with the ability to pass an Axes instance gives the program a lot of
+flexibility.
+
+An extension line from the annotation point to the y data value at the
+location of the identification i.e., flux level at the line, is drawn
+by default. The flux at the line is calculated using linear
+interpolation. This can be turned off using the `extend` keyword. This
+keyword can be set separately for each feature.
+
+The `plot_line_ids()` function will return the Axes and Figure
+instances used. Additional customizations, such as manual adjustments
+to positions, can be carried out using these references. To easily
+identify the labels, each label box and extension lines have their
+``label`` property set to a string that depends on the label text
+provided. Identifying the Matplotlib objects corresponding to these and
+customizing them are made easy by the many features provided by
+Matplotlib.
+
+The maximum iterations to use can be supplied using the `max_iter`
+keyword. The adjustments to be made in each iteration and when to
+change the adjustment factor can also be supplied. The defaults for
+these should be enough for most cases.
+
+Examples illustrating all these features are shown at
+http://phn.github.com/line_id_plot . Source for these are included in
+the `doc/index.rst` file as embedded code in ``..plot:``
+reStructuredText directives.
 
 Installation
 ============
 
-Download using the *Download* button or click on the line_id_plot.py file
-and then download the *raw* version.
+Use `pip`_ or `easy_install`::
+
+  $ pip install lineid_plot
+  
+or
+
+  $ easy_install lineid_plot
+
+
+To download the entire repository either clone the repository or use
+the *Download* button. To download just the `lineid_plot.py` file,
+click on the file and then download the *raw* version.
 
 Examples
 ========
+
+Detailed examples are provided at http://phn.github.com/line_id_plot .
 
 Code given below creates the following plot:
 
@@ -53,11 +105,6 @@ Code given below creates the following plot:
    >>> plot_line_ids(wave, flux, line_wave, line_label1)
    >>> plt.show()
 
-
-The `plot_line_ids()` function also accepts an Axes or a Figure in
-which to create the labels. The is useful in situations where we
-already have an Axes. For example, we may have multiple Axes in a
-Figure, and we want to add labels to one or more of these Axes.
 
 Code given below creates two Axes in a Figure, and plots data and
 labels in both of them. The result is:
