@@ -15,6 +15,12 @@ Manually placing labels in plots of spectrum is cumbersome. Functions
 in this module attempt to automatically position labels, in such a way
 that they do not overlap with each other.
 
+The module can be installed using `pip` and `easy_install`::
+
+  $ pip install lineid_plot
+
+The source code is available at https://github.com/phn/lineid_plot .
+
 The function `plot_line_ids()` takes several keyword parameters that
 can be used to customized the placement of labels. The labels are
 generated using the `annotate` function in Matplotlib. The function

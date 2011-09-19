@@ -3,6 +3,8 @@ Line identification plots using Matplotlib
 
 .. _lineid_plot: http://idlastro.gsfc.nasa.gov/ftp/pro/plot/lineid_plot.pro
 .. _IDL Astronomy User's Library: http://idlastro.gsfc.nasa.gov/
+.. _pip: http://pypi.python.org/pypi/pip 
+.. _easy_install: http://packages.python.org/distribute/easy_install.html
 
 Manually labeling features in a crowed plot can be very time
 consuming. Functions in this module can be used to automatically place
@@ -60,14 +62,14 @@ change the adjustment factor can also be supplied. The defaults for
 these should be enough for most cases.
 
 Examples illustrating all these features are shown at
-http://phn.github.com/line_id_plot . Source for these are included in
+http://phn.github.com/lineid_plot . Source for these are included in
 the `doc/index.rst` file as embedded code in ``..plot:``
 reStructuredText directives.
 
 Installation
 ============
 
-Use `pip`_ or `easy_install`::
+Use `pip`_ or `easy_install`_::
 
   $ pip install lineid_plot
   
@@ -83,7 +85,7 @@ click on the file and then download the *raw* version.
 Examples
 ========
 
-Detailed examples are provided at http://phn.github.com/line_id_plot .
+Detailed examples are provided at http://phn.github.com/lineid_plot .
 
 Code given below creates the following plot:
 
