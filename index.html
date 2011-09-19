@@ -66,6 +66,10 @@
 <p>Manually placing labels in plots of spectrum is cumbersome. Functions
 in this module attempt to automatically position labels, in such a way
 that they do not overlap with each other.</p>
+<p>The module can be installed using <cite>pip</cite> and <cite>easy_install</cite>:</p>
+<div class="highlight-python"><pre>$ pip install lineid_plot</pre>
+</div>
+<p>The source code is available at <a class="reference external" href="https://github.com/phn/lineid_plot">https://github.com/phn/lineid_plot</a> .</p>
 <p>The function <cite>plot_line_ids()</cite> takes several keyword parameters that
 can be used to customized the placement of labels. The labels are
 generated using the <cite>annotate</cite> function in Matplotlib. The function
@@ -90,7 +94,7 @@ customizations can be performed.</p>
 </pre></div>
 </div>
 <p>[<a class="reference external" href="./plot_directive/inline/eb632e691c.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/eb632e691c.pdf">pdf</a>]</p>
-<img alt="_images/eb632e691c.png" src="_images/eb632e691c.png" />
+<img alt="_images/eb632e691c1.png" src="_images/eb632e691c1.png" />
 </div>
 <div class="section" id="plot-without-line-from-annotation-point-to-flux-level">
 <h2><a class="toc-backref" href="#id3">Plot without line from annotation point to flux level</a><a class="headerlink" href="#plot-without-line-from-annotation-point-to-flux-level" title="Permalink to this headline">¶</a></h2>
@@ -111,7 +115,7 @@ customizations can be performed.</p>
 </pre></div>
 </div>
 <p>[<a class="reference external" href="./plot_directive/inline/3daaf25f72.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/3daaf25f72.pdf">pdf</a>]</p>
-<img alt="_images/3daaf25f72.png" src="_images/3daaf25f72.png" />
+<img alt="_images/3daaf25f721.png" src="_images/3daaf25f721.png" />
 </div>
 <div class="section" id="multiple-plots-using-user-provided-axes-instances">
 <h2><a class="toc-backref" href="#id4">Multiple plots using user provided Axes instances</a><a class="headerlink" href="#multiple-plots-using-user-provided-axes-instances" title="Permalink to this headline">¶</a></h2>
@@ -146,7 +150,7 @@ customizations can be performed.</p>
 </pre></div>
 </div>
 <p>[<a class="reference external" href="./plot_directive/inline/a51c5866df.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/a51c5866df.pdf">pdf</a>]</p>
-<img alt="_images/a51c5866df.png" src="_images/a51c5866df.png" />
+<img alt="_images/a51c5866df1.png" src="_images/a51c5866df1.png" />
 </div>
 <div class="section" id="applying-small-change-to-y-axis-location-of-label">
 <h2><a class="toc-backref" href="#id5">Applying small change to y axis location of label</a><a class="headerlink" href="#applying-small-change-to-y-axis-location-of-label" title="Permalink to this headline">¶</a></h2>
@@ -167,7 +171,7 @@ preferred when major changes are required.</p>
 </pre></div>
 </div>
 <p>[<a class="reference external" href="./plot_directive/inline/9b4d5d52d7.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/9b4d5d52d7.pdf">pdf</a>]</p>
-<img alt="_images/9b4d5d52d7.png" src="_images/9b4d5d52d7.png" />
+<img alt="_images/9b4d5d52d71.png" src="_images/9b4d5d52d71.png" />
 </div>
 <div class="section" id="custom-y-axis-location-for-annotation-points-arrow-tips">
 <h2><a class="toc-backref" href="#id6">Custom y axis location for annotation points (arrow tips)</a><a class="headerlink" href="#custom-y-axis-location-for-annotation-points-arrow-tips" title="Permalink to this headline">¶</a></h2>
@@ -181,7 +185,7 @@ range for the Axes and then pass the Axes instance to
 </pre></div>
 </div>
 <p>[<a class="reference external" href="./plot_directive/inline/3c825083b4.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/3c825083b4.pdf">pdf</a>]</p>
-<img alt="_images/3c825083b4.png" src="_images/3c825083b4.png" />
+<img alt="_images/3c825083b41.png" src="_images/3c825083b41.png" />
 <p>Each label can have its own annotation point.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">arrow_tips</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">]</span>
 <span class="n">lineid_plot</span><span class="o">.</span><span class="n">plot_line_ids</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">line_wave</span><span class="p">,</span> <span class="n">line_label1</span><span class="p">,</span>
@@ -189,7 +193,7 @@ range for the Axes and then pass the Axes instance to
 </pre></div>
 </div>
 <p>[<a class="reference external" href="./plot_directive/inline/7036a8693c.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/7036a8693c.pdf">pdf</a>]</p>
-<img alt="_images/7036a8693c.png" src="_images/7036a8693c.png" />
+<img alt="_images/7036a8693c1.png" src="_images/7036a8693c1.png" />
 </div>
 <div class="section" id="custom-y-axis-location-for-label-boxes">
 <h2><a class="toc-backref" href="#id7">Custom y axis location for label boxes</a><a class="headerlink" href="#custom-y-axis-location-for-label-boxes" title="Permalink to this headline">¶</a></h2>
@@ -203,7 +207,7 @@ instance to <cite>plot_line_ids()</cite>.</p>
 </pre></div>
 </div>
 <p>[<a class="reference external" href="./plot_directive/inline/750d6e1dfc.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/750d6e1dfc.pdf">pdf</a>]</p>
-<img alt="_images/750d6e1dfc.png" src="_images/750d6e1dfc.png" />
+<img alt="_images/750d6e1dfc1.png" src="_images/750d6e1dfc1.png" />
 <p>Each box can be assigned a separate Y box location.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">arrow_tips</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">]</span>
 <span class="n">box_loc</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.3</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">,</span> <span class="mf">4.4</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.4</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">]</span>
@@ -212,7 +216,7 @@ instance to <cite>plot_line_ids()</cite>.</p>
 </pre></div>
 </div>
 <p>[<a class="reference external" href="./plot_directive/inline/00e9f8f8c8.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/00e9f8f8c8.pdf">pdf</a>]</p>
-<img alt="_images/00e9f8f8c8.png" src="_images/00e9f8f8c8.png" />
+<img alt="_images/00e9f8f8c81.png" src="_images/00e9f8f8c81.png" />
 </div>
 <div class="section" id="accessing-a-specific-label">
 <h2><a class="toc-backref" href="#id8">Accessing a specific label</a><a class="headerlink" href="#accessing-a-specific-label" title="Permalink to this headline">¶</a></h2>
@@ -278,7 +282,7 @@ flux level are made invisible.</p>
 </pre></div>
 </div>
 <p>[<a class="reference external" href="./plot_directive/inline/bf698428b7.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/bf698428b7.pdf">pdf</a>]</p>
-<img alt="_images/bf698428b7.png" src="_images/bf698428b7.png" />
+<img alt="_images/bf698428b71.png" src="_images/bf698428b71.png" />
 </div>
 <div class="section" id="customizing-box-location-adjustment-parameters">
 <h2><a class="toc-backref" href="#id9">Customizing box location adjustment parameters</a><a class="headerlink" href="#customizing-box-location-adjustment-parameters" title="Permalink to this headline">¶</a></h2>
@@ -295,14 +299,14 @@ doesn&#8217;t separate the labels well enough.</p>
 </pre></div>
 </div>
 <p>[<a class="reference external" href="./plot_directive/inline/a64ec3145b.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/a64ec3145b.pdf">pdf</a>]</p>
-<img alt="_images/a64ec3145b.png" src="_images/a64ec3145b.png" />
+<img alt="_images/a64ec3145b1.png" src="_images/a64ec3145b1.png" />
 <p>Using a value of 300 works. Note that the default is 1000.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">lineid_plot</span><span class="o">.</span><span class="n">plot_line_ids</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">line_wave</span><span class="p">,</span> <span class="n">line_label1</span><span class="p">,</span>
  <span class="n">max_iter</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>[<a class="reference external" href="./plot_directive/inline/c911e258b6.hires.png">hires.png</a>, <a class="reference external" href="./plot_directive/inline/c911e258b6.pdf">pdf</a>]</p>
-<img alt="_images/c911e258b6.png" src="_images/c911e258b6.png" />
+<img alt="_images/c911e258b61.png" src="_images/c911e258b61.png" />
 </div>
 </div>
 
