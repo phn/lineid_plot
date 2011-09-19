@@ -265,6 +265,8 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
               boxes is set to `arrow_tip` + this many figure fraction
               units. The default is 0.06. This ensures that the label
               layout appearance is independent of the y data range.
+          max_iter: int
+              Maximum iterations to use. Default is set to 1000.
 
     Returns
     -------
@@ -297,6 +299,8 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
       annotation point to the flux at the line wavelength. The flux is
       calculated by linear interpolation. This parameter can be a list,
       with one value for each line.
+    + The maximum iterations to be used can be customized using the
+      `max_iter` keyword parameter.
 
     """
     wave = np.array(wave)
@@ -312,6 +316,7 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     label1_size = _convert_to_array(label1_size, nlines, "lable1_size")
 
     extend = _convert_to_array(extend, nlines, "extend")
+    max_iter = kwargs.get('max_iter', 1000)
 
     # Sort.
     indx = np.argsort(wave)
@@ -394,7 +399,8 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     # code in lineid_plot.pro in IDLASTRO.
     wlp, niter, changed = adjust_boxes(line_wave, box_widths,
                                        np.min(wave), np.max(wave),
-                                       adjust_factor=0.35, max_iter=1000)
+                                       adjust_factor=0.35,
+                                       max_iter=max_iter)
 
     # Redraw the boxes at their new x location.
     for i in range(nlines):
