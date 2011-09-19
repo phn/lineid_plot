@@ -11,9 +11,9 @@ Line identification plots with automatic label layout
 .. toctree::
    :maxdepth: 2
 
-Manually placing labels in plots of spectrum is cumbersome. This module
-attempts to automatically position labels, in such a way that they do
-not overlap with each other.
+Manually placing labels in plots of spectrum is cumbersome. Functions
+in this module attempt to automatically position labels, in such a way
+that they do not overlap with each other.
 
 The function `plot_line_ids()` takes several keyword parameters that
 can be used to customized the placement of labels. The labels are
@@ -99,6 +99,47 @@ Multiple plots using user provided Axes instances
 
    plt.show()
 
+
+Applying small change to y axis location of label
+-------------------------------------------------
+
+By default the annotation point is placed on the y-axes upper bound and
+the box is placed 0.06 *figure fraction* units above the annotation
+point. Figure fraction units is used so that the appearance doesn't
+depend on the y range of data. The default box location i.e., 0.06 can
+be changed using the keyword parameter `box_axes_space`.
+
+It is better not to use large values for this keyword. Large values can
+lead to `RuntimeError` when Matplotlib tries to render the plot.
+
+Examples of changing y axis locations of annotation points and label
+locations using data coordinates are show later. These methods are
+preferred when major changes are required.
+
+.. code-block:: python
+
+  # box_axes_space takes numbers in figure fraction units. Keep this
+  # small.
+  lineid_plot.plot_line_ids(wave, flux, line_wave, line_label1, 
+    box_axes_space=0.08)
+
+.. plot::
+
+   import numpy as np
+   from matplotlib import pyplot as plt
+   import lineid_plot
+    
+   wave = 1240 + np.arange(300) * 0.1
+   flux = np.random.normal(size=300) 
+   line_wave = [1242.80, 1260.42, 1264.74, 1265.00, 1265.2, 1265.3, 1265.35]
+   line_flux = np.interp(line_wave, wave, flux)
+   line_label1 = ['N V', 'Si II', 'Si II', 'Si II', 'Si II', 'Si II', 'Si II']
+   label1_sizes = np.array([12, 12, 12, 12, 12, 12, 12])
+
+   lineid_plot.plot_line_ids(wave, flux, line_wave, line_label1, 
+     box_axes_space=0.08)
+
+   plt.show()
 
 Custom y axis location for annotation points (arrow tips)
 ---------------------------------------------------------
