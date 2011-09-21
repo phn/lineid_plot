@@ -141,7 +141,7 @@ Each of the boxes and the lines extending to the flux level have their
 label property set to a unique value. These can be used to quickly
 identify them.
 
-.. code-block:: python
+::
 
   >>> for i in ax.texts:
      ....:     print i.get_label()
@@ -166,7 +166,7 @@ identify them.
   Si II_num_6_line
 
 
-The label `_line0` corresponds to the plot and was assigned by
+The label ``_line0`` corresponds to the plot and was assigned by
 Matplotlib.
 
 License
