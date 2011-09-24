@@ -387,7 +387,8 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
                     label=label_u[i])
         if extend[i]:
             ax.plot([line_wave[i]] * 2, [arrow_tip[i], line_flux[i]],
-                    "--", scalex=False, scaley=False,
+                    linestyle="--", color="k",
+                    scalex=False, scaley=False,
                     label=label_u[i] + "_line")
 
     # Draw the figure so that get_window_extent() below works.
@@ -433,6 +434,6 @@ if __name__ == "__main__":
     line_wave = [1242.80, 1260.42, 1264.74, 1265.00, 1265.2, 1265.3, 1265.35]
     line_flux = np.interp(line_wave, wave, flux)
     line_label1 = ['N V', 'Si II', 'Si II', 'Si II', 'Si II', 'Si II', 'Si II']
-    label1_sizes = np.array([12, 12, 12, 12, 12, 12, 12])
-    plot_line_ids(wave, flux, line_wave, line_label1)
+    label1_size = np.array([12, 12, 12, 12, 12, 12, 12])
+    plot_line_ids(wave, flux, line_wave, line_label1, label1_size)
     plt.show()
