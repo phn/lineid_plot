@@ -6,7 +6,7 @@ from __future__ import division, print_function
 import numpy as np
 from matplotlib import pyplot as plt
 
-__version__ = "0.1"
+__version__ = "0.2"
 __author__ = "Prasanth Nair"
 
 
