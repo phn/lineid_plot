@@ -420,7 +420,11 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     # Redraw the boxes at their new x location.
     for i in range(nlines):
         box = ax.texts[i]
-        box.xytext = (wlp[i], box.xytext[1])
+        if box.xytext is not None:
+            box.xytext = (wlp[i], box.xytext[1])
+        else:
+            box.xyann = (wlp[i], box.xyann[1])
+
 
     # Update the figure
     fig.canvas.draw()
