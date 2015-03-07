@@ -303,7 +303,7 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     + If `box_loc` is given, then the boxes are placed at this
       position. This too can be a list.
     + `arrow_tip` and `box_loc` are the "y" components of `xy` and
-      `xytext` parameters accepted by the `annotate` function in
+      `xyann` parameters accepted by the `annotate` function in
       Matplotlib.
     + If the `extend` keyword is True then a line is drawn from the
       annotation point to the flux at the line wavelength. The flux is
@@ -420,8 +420,8 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     # Redraw the boxes at their new x location.
     for i in range(nlines):
         box = ax.texts[i]
-        if box.xytext is not None:
-            box.xytext = (wlp[i], box.xytext[1])
+        if box.xyann is not None:
+            box.xyann = (wlp[i], box.xyann[1])
         else:
             box.xyann = (wlp[i], box.xyann[1])
 
