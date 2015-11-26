@@ -6,7 +6,7 @@ from __future__ import division, print_function
 import numpy as np
 from matplotlib import pyplot as plt
 
-__version__ = "0.2"
+__version__ = "0.2.1"
 __author__ = "Prasanth Nair"
 
 
@@ -46,9 +46,7 @@ def unique_labels(line_labels):
     d = defaultdict(int)
     for i in line_labels:
         d[i] += 1
-    for k in d.keys():
-        if d[k] == 1:
-            del d[k]
+    d = dict((i, k) for i, k in d.items() if k != 1)
     line_labels_u = []
     for lab in reversed(line_labels):
         c = d.get(lab, 0)
@@ -303,8 +301,8 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     + If `box_loc` is given, then the boxes are placed at this
       position. This too can be a list.
     + `arrow_tip` and `box_loc` are the "y" components of `xy` and
-      `xytext` parameters accepted by the `annotate` function in
-      Matplotlib.
+      `xyann` (deprecated name `xytext`) parameters accepted by the `annotate`
+      function in Matplotlib.
     + If the `extend` keyword is True then a line is drawn from the
       annotation point to the flux at the line wavelength. The flux is
       calculated by linear interpolation. This parameter can be a list,
@@ -366,7 +364,7 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
         box_loc = get_box_loc(fig, ax, line_wave, arrow_tip, box_axes_space)
     else:
         box_loc = _convert_to_array(box_loc, nlines, "box_loc")
-        box_loc = zip(line_wave, box_loc)
+        box_loc = tuple(zip(line_wave, box_loc))
 
     # If any labels are repeated add "_num_#" to it. If there are 3 "X"
     # then the first gets "X_num_3". The result is passed as the label
@@ -420,7 +418,10 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     # Redraw the boxes at their new x location.
     for i in range(nlines):
         box = ax.texts[i]
-        box.xytext = (wlp[i], box.xytext[1])
+        if hasattr(box, 'xyann'):
+            box.xyann = (wlp[i], box.xyann[1])
+        else:
+            box.xytext = (wlp[i], box.xytext[1])
 
     # Update the figure
     fig.canvas.draw()
