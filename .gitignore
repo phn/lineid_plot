@@ -2,3 +2,9 @@ _build
 build
 *.pyc
 *.html
+dist/
+.cache/
+.tox/
+fontList.*
+MANIFEST
+
