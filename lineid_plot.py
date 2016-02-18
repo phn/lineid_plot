@@ -425,7 +425,7 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     # Redraw the boxes at their new x location.
     for i in range(nlines):
         box = ax.texts[i]
-        if hasattr(box,'xyann'):
+        if hasattr(box, 'xyann'):
             box.xyann = (wlp[i], box.xyann[1])
         else:
             warnings.warn("Warning: missing xyann attribute.  Your matplotlib"
