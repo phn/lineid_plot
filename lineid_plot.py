@@ -427,9 +427,12 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
         box = ax.texts[i]
         if hasattr(box, 'xyann'):
             box.xyann = (wlp[i], box.xyann[1])
+        elif hasattr(box, 'xytext'):
+            box.xytext = (wlp[i], box.xytext[1])
         else:
-            warnings.warn("Warning: missing xyann attribute.  Your matplotlib"
-                          " version may not be compatible with lineid_plot.")
+            warnings.warn("Warning: missing xyann and xytext attributes. "
+                          "Your matplotlib version may not be compatible "
+                          "with lineid_plot.")
 
 
     # Update the figure
