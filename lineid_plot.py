@@ -395,8 +395,7 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
             ax.plot([line_wave[i]] * 2, [arrow_tip[i], line_flux[i]],
                     scalex=False, scaley=False,
                     label=label_u[i] + "_line",
-                    **plot_kwargs,
-                   )
+                    **plot_kwargs)
 
     # Draw the figure so that get_window_extent() below works.
     fig.canvas.draw()
