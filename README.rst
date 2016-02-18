@@ -42,10 +42,10 @@ A basic plot can be created by calling the function
 ``plot_line_ids()``, and passing labels and x-axis locations of
 features.
 
-.. image:: http://github.com/phn/lineid_plot/blob/master/simple_plot.png?raw=true
+.. image:: simple_plot.png?raw=true
    :scale: 75%
 
-::
+.. code-block:: python
 
    >>> import numpy as np
    >>> from matplotlib import pyplot as plt
@@ -64,10 +64,10 @@ features.
 The ``plot_line_ids()`` function also accepts Axes and/or Figure
 instances where labels are to be draw. 
 
-.. image:: http://github.com/phn/lineid_plot/blob/master/multi_axes.png?raw=true
+.. image:: multi_axes.png?raw=true
    :scale: 75%
 
-::
+.. code-block:: python
 
   >>> import numpy as np
   >>> from matplotlib import pyplot as plt
@@ -95,7 +95,7 @@ Each of the boxes and the lines extending to the flux level have their
 label property set to a unique value. These can be used to quickly
 identify them.
 
-::
+.. code-block:: python
 
   >>> for i in ax.texts:
      ....:     print i.get_label()
