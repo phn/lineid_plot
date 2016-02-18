@@ -225,7 +225,9 @@ def prepare_axes(wave, flux, fig=None, ax_lower=(0.1, 0.1),
 
 
 def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
-                  extend=True, **kwargs):
+                  extend=True, annotation_kwargs={},
+                  plot_kwargs=dict(linestyle="--", color="k",),
+                  **kwargs):
     """Label features with automatic layout of labels.
 
     Parameters
@@ -245,6 +247,10 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
         For those lines for which this keyword is True, a dashed line
         will be drawn from the tip of the annotation to the flux at the
         line.
+    annotation_kwargs : dict
+        Keyword arguments to pass to `annotate`, e.g. color.
+    plot_kwargs : dict
+        Keyword arguments to pass to `plot`, e.g. color.
     kwargs: key value pairs
         All of these keywords are optional.
 
@@ -301,8 +307,8 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     + If `box_loc` is given, then the boxes are placed at this
       position. This too can be a list.
     + `arrow_tip` and `box_loc` are the "y" components of `xy` and
-      `xyann` (deprecated name `xytext`) parameters accepted by the `annotate`
-      function in Matplotlib.
+      `xyann` parameters accepted by the `annotate` function in
+      Matplotlib.
     + If the `extend` keyword is True then a line is drawn from the
       annotation point to the flux at the line wavelength. The flux is
       calculated by linear interpolation. This parameter can be a list,
@@ -383,12 +389,13 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
                     fontsize=label1_size[i],
                     arrowprops=dict(arrowstyle="-",
                                     relpos=(0.5, 0.0)),
-                    label=label_u[i])
+                    label=label_u[i],
+                    **annotation_kwargs)
         if extend[i]:
             ax.plot([line_wave[i]] * 2, [arrow_tip[i], line_flux[i]],
-                    linestyle="--", color="k",
                     scalex=False, scaley=False,
-                    label=label_u[i] + "_line")
+                    label=label_u[i] + "_line",
+                    **plot_kwargs)
 
     # Draw the figure so that get_window_extent() below works.
     fig.canvas.draw()
@@ -420,8 +427,13 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
         box = ax.texts[i]
         if hasattr(box, 'xyann'):
             box.xyann = (wlp[i], box.xyann[1])
-        else:
+        elif hasattr(box, 'xytext'):
             box.xytext = (wlp[i], box.xytext[1])
+        else:
+            warnings.warn("Warning: missing xyann and xytext attributes. "
+                          "Your matplotlib version may not be compatible "
+                          "with lineid_plot.")
+
 
     # Update the figure
     fig.canvas.draw()
