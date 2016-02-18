@@ -225,7 +225,9 @@ def prepare_axes(wave, flux, fig=None, ax_lower=(0.1, 0.1),
 
 
 def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
-                  extend=True, **kwargs):
+                  extend=True, annotation_kwargs={},
+                  plot_kwargs=dict(linestyle="--", color="k",),
+                  **kwargs):
     """Label features with automatic layout of labels.
 
     Parameters
@@ -245,6 +247,10 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
         For those lines for which this keyword is True, a dashed line
         will be drawn from the tip of the annotation to the flux at the
         line.
+    annotation_kwargs : dict
+        Keyword arguments to pass to `annotate`, e.g. color.
+    plot_kwargs : dict
+        Keyword arguments to pass to `plot`, e.g. color.
     kwargs: key value pairs
         All of these keywords are optional.
 
@@ -383,12 +389,14 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
                     fontsize=label1_size[i],
                     arrowprops=dict(arrowstyle="-",
                                     relpos=(0.5, 0.0)),
-                    label=label_u[i])
+                    label=label_u[i],
+                    **annotation_kwargs)
         if extend[i]:
             ax.plot([line_wave[i]] * 2, [arrow_tip[i], line_flux[i]],
-                    linestyle="--", color="k",
                     scalex=False, scaley=False,
-                    label=label_u[i] + "_line")
+                    label=label_u[i] + "_line",
+                    **plot_kwargs,
+                   )
 
     # Draw the figure so that get_window_extent() below works.
     fig.canvas.draw()
