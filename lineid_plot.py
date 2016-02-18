@@ -425,10 +425,11 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     # Redraw the boxes at their new x location.
     for i in range(nlines):
         box = ax.texts[i]
-        if box.xyann is not None:
+        if hasattr(box,'xyann'):
             box.xyann = (wlp[i], box.xyann[1])
         else:
-            box.xyann = (wlp[i], box.xyann[1])
+            warnings.warn("Warning: missing xyann attribute.  Your matplotlib"
+                          " version may not be compatible with lineid_plot.")
 
 
     # Update the figure
