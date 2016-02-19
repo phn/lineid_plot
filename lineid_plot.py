@@ -3,10 +3,12 @@
 Depends on Numpy and Matplotlib.
 """
 from __future__ import division, print_function
+
+import warnings
 import numpy as np
 from matplotlib import pyplot as plt
 
-__version__ = "0.2.1"
+__version__ = "0.3"
 __author__ = "Prasanth Nair"
 
 
@@ -35,7 +37,7 @@ def _convert_to_array(x, size, name):
 
 
 def get_line_flux(line_wave, wave, flux, **kwargs):
-    """Interpolated flux at a given wavelength (calls np.intrep).
+    """Interpolated flux at a given wavelength (calls np.interp).
     """
     return np.interp(line_wave, wave, flux, **kwargs)
 
@@ -195,8 +197,10 @@ def adjust_boxes(line_wave, box_widths, left_edge, right_edge,
                 separation2 = box_widths[i]
 
             if diff1 < separation1 or diff2 < separation2:
-                if wlp[i] == left_edge: diff1 = 0
-                if wlp[i] == right_edge: diff2 = 0
+                if wlp[i] == left_edge:
+                    diff1 = 0
+                if wlp[i] == right_edge:
+                    diff2 = 0
                 if diff2 > diff1:
                     wlp[i] = wlp[i] + separation2 * adjust_factor
                     wlp[i] = wlp[i] if wlp[i] < right_edge else \
@@ -207,8 +211,10 @@ def adjust_boxes(line_wave, box_widths, left_edge, right_edge,
                         left_edge
                 changed = True
             niter += 1
-        if niter == max_iter * fd_p: adjust_factor /= factor_decrement
-        if niter >= max_iter: break
+        if niter == max_iter * fd_p:
+            adjust_factor /= factor_decrement
+        if niter >= max_iter:
+            break
 
     return wlp, changed, niter
 
@@ -224,9 +230,22 @@ def prepare_axes(wave, flux, fig=None, ax_lower=(0.1, 0.1),
     return fig, ax
 
 
+def initial_annotate_kwargs():
+    """Default parameters passed to Axes.annotate to create labels."""
+    return dict(
+        xycoords="data", textcoords="data",
+        rotation=90, horizontalalignment="center", verticalalignment="center",
+        arrowprops=dict(arrowstyle="-", relpos=(0.5, 0.0))
+    )
+
+
+def initial_plot_kwargs():
+    """Default parameters passed to Axes.plot to create line from label into plot."""
+    return dict(linestyle="--", color="k",)
+
+
 def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
-                  extend=True, annotation_kwargs={},
-                  plot_kwargs=dict(linestyle="--", color="k",),
+                  extend=True, annotate_kwargs={}, plot_kwargs={},
                   **kwargs):
     """Label features with automatic layout of labels.
 
@@ -247,10 +266,14 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
         For those lines for which this keyword is True, a dashed line
         will be drawn from the tip of the annotation to the flux at the
         line.
-    annotation_kwargs : dict
+    annotate_kwargs : dict
         Keyword arguments to pass to `annotate`, e.g. color.
+
+        Default value is obtained by calling ``initial_annotate_kwargs()``.
     plot_kwargs : dict
         Keyword arguments to pass to `plot`, e.g. color.
+
+        Default value is obtained by calling ``initial_plot_kwargs()``.
     kwargs: key value pairs
         All of these keywords are optional.
 
@@ -325,7 +348,7 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     nlines = len(line_wave)
     assert nlines == len(line_label1), "Each line must have a label."
 
-    if label1_size == None:
+    if label1_size is None:
         label1_size = np.array([12] * nlines)
     label1_size = _convert_to_array(label1_size, nlines, "lable1_size")
 
@@ -378,24 +401,24 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     # corresponding to a label using Figure.findobj.
     label_u = unique_labels(line_label1)
 
+    ak = initial_annotate_kwargs()
+    ak.update(annotate_kwargs)
+    pk = initial_plot_kwargs()
+    pk.update(plot_kwargs)
     # Draw boxes at initial (x, y) location.
     for i in range(nlines):
         ax.annotate(line_label1[i], xy=(line_wave[i], arrow_tip[i]),
                     xytext=(box_loc[i][0],
                             box_loc[i][1]),
-                    xycoords="data", textcoords="data",
-                    rotation=90, horizontalalignment="center",
-                    verticalalignment="center",
+
                     fontsize=label1_size[i],
-                    arrowprops=dict(arrowstyle="-",
-                                    relpos=(0.5, 0.0)),
                     label=label_u[i],
-                    **annotation_kwargs)
+                    **ak)
         if extend[i]:
             ax.plot([line_wave[i]] * 2, [arrow_tip[i], line_flux[i]],
                     scalex=False, scaley=False,
                     label=label_u[i] + "_line",
-                    **plot_kwargs)
+                    **pk)
 
     # Draw the figure so that get_window_extent() below works.
     fig.canvas.draw()
@@ -433,7 +456,6 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
             warnings.warn("Warning: missing xyann and xytext attributes. "
                           "Your matplotlib version may not be compatible "
                           "with lineid_plot.")
-
 
     # Update the figure
     fig.canvas.draw()
