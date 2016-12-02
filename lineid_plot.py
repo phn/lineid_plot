@@ -8,7 +8,7 @@ import warnings
 import numpy as np
 from matplotlib import pyplot as plt
 
-__version__ = "0.3"
+__version__ = "0.4"
 __author__ = "Prasanth Nair"
 
 
@@ -304,7 +304,10 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
               layout appearance is independent of the y data range.
           max_iter: int
               Maximum iterations to use. Default is set to 1000.
-
+          add_label_to_artists: boolean
+              If True (default is True) then add unique labels to artists, both
+              text labels and line extending from text label to spectrum. If
+              False then don't add such labels.
     Returns
     -------
     fig, ax: Matplotlib Figure, Matplotlib Axes
@@ -338,6 +341,12 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
       with one value for each line.
     + The maximum iterations to be used can be customized using the
       `max_iter` keyword parameter.
+    + add_label_to_artists: Adding labels to artists makes it very easy to get
+      reference to an artist using Figure.findobj. But a call to plt.legend()
+      will display legend for the lines. Setting add_label_to_artists=False,
+      will not add labels to text or lines and solves this issue. We can all
+      plt.legend() with artists and labels to only display legends for the
+      specified artists.
 
     """
     wave = np.array(wave)
@@ -398,8 +407,13 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     # If any labels are repeated add "_num_#" to it. If there are 3 "X"
     # then the first gets "X_num_3". The result is passed as the label
     # parameter of annotate. This makes it easy to find the box
-    # corresponding to a label using Figure.findobj.
-    label_u = unique_labels(line_label1)
+    # corresponding to a label using Figure.findobj. But the downside is that a
+    # call to plt.legend() will display legends for the lines (from text to
+    # spectrum location). So we don't add the label to artists if the user
+    # doesn't want to.
+    al = kwargs.get('add_label_to_artists', True)
+    label_u = unique_labels(line_label1) if al else [None for _ in line_label1]
+    label_u_line = [i + "_line" for i in label_u] if al else label_u
 
     ak = initial_annotate_kwargs()
     ak.update(annotate_kwargs)
@@ -417,7 +431,7 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
         if extend[i]:
             ax.plot([line_wave[i]] * 2, [arrow_tip[i], line_flux[i]],
                     scalex=False, scaley=False,
-                    label=label_u[i] + "_line",
+                    label=label_u_line[i],
                     **pk)
 
     # Draw the figure so that get_window_extent() below works.

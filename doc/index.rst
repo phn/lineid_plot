@@ -416,6 +416,19 @@ flux level are made invisible.
 
    plt.show()
 
+Adding a label to lines can cause problems when using ``plt.legend()``: the
+legend will include the lines drawn from text box to spectrum location. There
+are two ways of overcoming this. First is to provide explicit artists and texts
+to ``plt.legend()``. Second is to tell ``lineid_plot`` not to add these  labels
+by passing in ``add_label_to_artists=False``. Of-course, if we use the second
+option then we can't use the above method for finding text and lines.
+
+.. code-block:: python
+
+    fig, ax = lineid_plot.plot_line_ids(
+        wave, flux, line_wave, line_label1, max_iter=300, add_label_to_artists=False
+    )
+    
 
 Customizing box location adjustment parameters
 ----------------------------------------------

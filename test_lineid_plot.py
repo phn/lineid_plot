@@ -232,3 +232,21 @@ def test_max_iter_large():
     lineid_plot.plot_line_ids(wave, flux, line_wave, line_label1, max_iter=300)
 
     # plt.show()
+
+
+def test_dont_add_label_to_artists():
+    wave = 1240 + np.arange(300) * 0.1
+    flux = np.random.normal(size=300)
+    line_wave = [1242.80, 1260.42, 1264.74, 1265.00, 1265.2, 1265.3, 1265.35]
+    line_label1 = ['N V', 'Si II', 'Si II', 'Si II', 'Si II', 'Si II', 'Si II']
+
+    fig, ax = lineid_plot.plot_line_ids(
+        wave, flux, line_wave, line_label1, max_iter=300, add_label_to_artists=False
+    )
+
+    labels = lineid_plot.unique_labels(line_label1)
+    for label in labels:
+        assert fig.findobj(match=lambda x: x.get_label() == label) == []
+        assert fig.findobj(match=lambda x: x.get_label() == label + "_line") == []
+
+    # plt.show()
