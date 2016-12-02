@@ -8,7 +8,7 @@ import warnings
 import numpy as np
 from matplotlib import pyplot as plt
 
-__version__ = "0.4"
+__version__ = "0.5"
 __author__ = "Prasanth Nair"
 
 
