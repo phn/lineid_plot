@@ -2,13 +2,9 @@
 
 from distutils.core import setup
 
-import lineid_plot
-
-version = lineid_plot.__version__
-
 setup(
     name="lineid_plot",
-    version=version,
+    version="0.5",
     description="Automatic placement of labels in a plot.",
     license='BSD',
     author="Prasanth Nair",
