@@ -7,4 +7,5 @@ dist/
 .tox/
 fontList.*
 MANIFEST
+*.egg-info/
 
