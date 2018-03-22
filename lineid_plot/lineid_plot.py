@@ -8,8 +8,9 @@ import warnings
 import numpy as np
 from matplotlib import pyplot as plt
 
-__version__ = "0.5"
-__author__ = "Prasanth Nair"
+__all__ = ['plot_line_ids', 'initial_annotate_kwargs', 'initial_plot_kwargs',
+           'unique_labels', 'get_line_flux', 'get_box_loc', 'adjust_boxes',
+           'prepare_axes']
 
 
 def _convert_to_array(x, size, name):
