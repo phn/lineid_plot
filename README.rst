@@ -10,7 +10,7 @@ Functions in this module can be used to automatically place labels without the
 labels overlapping each other. This is useful, for example, in creating plots of
 a spectrum with spectral lines identified with labels.
 
-For more details see http://phn.github.io/lineid_plot.
+For more details see http://lineid-plot.readthedocs.io.
 
 Installation
 ============
@@ -22,7 +22,7 @@ Use `pip`_::
 Examples
 ========
 
-Detailed examples are provided at http://phn.github.io/lineid_plot .
+Detailed examples are provided at http://lineid-plot.readthedocs.io .
 
 A basic plot can be created by calling the function
 ``plot_line_ids()``, and passing labels and x-axis locations of
