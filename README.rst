@@ -3,13 +3,14 @@ Line identification plots using Matplotlib
 
 .. _lineid_plot: http://idlastro.gsfc.nasa.gov/ftp/pro/plot/lineid_plot.pro
 .. _IDL Astronomy User's Library: http://idlastro.gsfc.nasa.gov/
-.. _pip: http://pypi.python.org/pypi/pip 
+.. _pip: http://pypi.python.org/pypi/pip
 
 Manually labeling features in a crowed plot can be very time consuming.
 Functions in this module can be used to automatically place labels without the
 labels overlapping each other. This is useful, for example, in creating plots of
 a spectrum with spectral lines identified with labels.
 
+For more details see http://phn.github.io/lineid_plot.
 
 Installation
 ============
@@ -17,7 +18,7 @@ Installation
 Use `pip`_::
 
   $ pip install lineid_plot
-  
+
 Examples
 ========
 
@@ -47,7 +48,7 @@ features.
 
 
 The ``plot_line_ids()`` function also accepts Axes and/or Figure
-instances where labels are to be draw. 
+instances where labels are to be draw.
 
 .. image:: multi_axes.png?raw=true
    :scale: 75%
@@ -57,16 +58,16 @@ instances where labels are to be draw.
   >>> import numpy as np
   >>> from matplotlib import pyplot as plt
   >>> import lineid_plot
-   
+
   >>> wave = 1240 + np.arange(300) * 0.1
   >>> flux = np.random.normal(size=300)
   >>> line_wave = [1242.80, 1260.42, 1264.74, 1265.00, 1265.2, 1265.3, 1265.35]
   >>> line_flux = np.interp(line_wave, wave, flux)
   >>> line_label1 = ['N V', 'Si II', 'Si II', 'Si II', 'Si II', 'Si II', 'Si II']
   >>> label1_sizes = np.array([12, 12, 12, 12, 12, 12, 12])
-   
+
   >>> fig = plt.figure(1)
-  
+
   >>> ax = fig.add_axes([0.1,0.06, 0.85, 0.35])
   >>> ax.plot(wave, flux)
   >>> lineid_plot.plot_line_ids(wave, flux, line_wave, line_label1, ax=ax)
@@ -100,7 +101,7 @@ obtaining a reference to it as shown in another example below.
    >>> line_label1 = ['N V', 'Si II', 'Si II', 'Si II', 'Si II', 'Si II', 'Si II']
 
    >>> ak = lineid_plot.initial_annotate_kwargs()
-   >>> ak 
+   >>> ak
    {'arrowprops': {'arrowstyle': '->', 'relpos': (0.5, 0.0)},
     'horizontalalignment': 'center',
     'rotation': 90,
@@ -108,12 +109,12 @@ obtaining a reference to it as shown in another example below.
     'verticalalignment': 'center',
     'xycoords': 'data'}
    >>> ak['arrowprops']['arrowstyle'] = "->"
-   
+
    >>> pk = lineid_plot.initial_plot_kwargs()
    >>> pk
    {'color': 'k', 'linestyle': '--'}
    >>> pk['color'] = "red"
-   
+
    >>> lineid_plot.plot_line_ids(wave, flux, line_wave, line_label1, annotate_kwargs=ak, plot_kwargs=pk)
    >>> plt.show()
 
@@ -127,7 +128,7 @@ them.
 
   >>> for i in ax.texts:
      ....:     print i.get_label()
-     ....:     
+     ....:
   N V
   Si II_num_1
   Si II_num_2
@@ -137,7 +138,7 @@ them.
   Si II_num_6
   >>> for i in ax.lines:
      ....:     print i.get_label()
-     ....:     
+     ....:
   _line0
   N V_line
   Si II_num_1_line
@@ -176,7 +177,7 @@ method for customizing boxes and lines.
    >>> b = ax.findobj(match=lambda x: x.get_label() == 'Si II_num_1')[0]
    >>> b.set_rotation(0)
    >>> b.set_text("Si II$\lambda$1260.42")
-   
+
    >>> line = ax.findobj(match=lambda x: x.get_label() == 'Si II_num_1_line')[0]
    >>> line.set_color("red")
    >>> line.set_linestyle("-")
@@ -263,10 +264,10 @@ Released under BSD; see http://www.opensource.org/licenses/bsd-license.php.
 Credits
 =======
 
-Code here is adapted from `lineid_plot`_ procedure in the 
-`IDL Astronomy User's Library`_ (IDLASTRO) IDL code distributed by NASA. 
+Code here is adapted from `lineid_plot`_ procedure in the
+`IDL Astronomy User's Library`_ (IDLASTRO) IDL code distributed by NASA.
 
-For comments and suggestions, email to user prasanthhn in the gmail.com domain. 
+For comments and suggestions, email to user prasanthhn in the gmail.com domain.
 
 
 ..  LocalWords:  lineid IDL idlastro gsfc nasa
