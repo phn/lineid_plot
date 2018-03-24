@@ -38,8 +38,7 @@ def _convert_to_array(x, size, name):
 
 
 def get_line_flux(line_wave, wave, flux, **kwargs):
-    """Interpolated flux at a given wavelength (calls np.interp).
-    """
+    """Interpolated flux at a given wavelength (calls np.interp)."""
     return np.interp(line_wave, wave, flux, **kwargs)
 
 
@@ -232,7 +231,7 @@ def prepare_axes(wave, flux, fig=None, ax_lower=(0.1, 0.1),
 
 
 def initial_annotate_kwargs():
-    """Default parameters passed to Axes.annotate to create labels."""
+    """Return default parameters passed to Axes.annotate to create labels."""
     return dict(
         xycoords="data", textcoords="data",
         rotation=90, horizontalalignment="center", verticalalignment="center",
@@ -241,12 +240,12 @@ def initial_annotate_kwargs():
 
 
 def initial_plot_kwargs():
-    """Default parameters passed to Axes.plot to create line from label into plot."""
+    """Return default parameters passed to Axes.plot to create line from label into plot."""
     return dict(linestyle="--", color="k",)
 
 
 def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
-                  extend=True, annotate_kwargs={}, plot_kwargs={},
+                  extend=True, annotate_kwargs=None, plot_kwargs=None,
                   **kwargs):
     """Label features with automatic layout of labels.
 
@@ -416,6 +415,10 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     label_u = unique_labels(line_label1) if al else [None for _ in line_label1]
     label_u_line = [i + "_line" for i in label_u] if al else label_u
 
+    if annotate_kwargs is None:
+        annotate_kwargs = {}
+    if plot_kwargs is None:
+        plot_kwargs = {}
     ak = initial_annotate_kwargs()
     ak.update(annotate_kwargs)
     pk = initial_plot_kwargs()
@@ -478,13 +481,3 @@ def plot_line_ids(wave, flux, line_wave, line_label1, label1_size=None,
     # Return Figure and Axes so that they can be used for further
     # manual customization.
     return fig, ax
-
-if __name__ == "__main__":
-    wave = 1240 + np.arange(300) * 0.1
-    flux = np.random.normal(size=300)
-    line_wave = [1242.80, 1260.42, 1264.74, 1265.00, 1265.2, 1265.3, 1265.35]
-    line_flux = np.interp(line_wave, wave, flux)
-    line_label1 = ['N V', 'Si II', 'Si II', 'Si II', 'Si II', 'Si II', 'Si II']
-    label1_size = np.array([12, 12, 12, 12, 12, 12, 12])
-    plot_line_ids(wave, flux, line_wave, line_label1, label1_size)
-    plt.show()

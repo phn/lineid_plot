@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-
+"""Lineid_plot setup.py."""
 import os
 from setuptools import setup, find_packages
 
@@ -24,6 +23,8 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Topic :: Scientific/Engineering :: Astronomy',
         'Topic :: Scientific/Engineering :: Physics',
-        'Programming Language :: Python',
-        ],
-    )
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+    ],
+)
